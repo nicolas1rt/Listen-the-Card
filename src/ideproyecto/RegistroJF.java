@@ -5,17 +5,21 @@
  */
 package ideproyecto;
 
+import java.sql.*;
 /**
  *
  * @author Nicolas Ramirez
  */
 public class RegistroJF extends javax.swing.JFrame {
+    
+    int avatarEscogido;
 
-    /**
-     * Creates new form RegistroJF
-     */
+    IDEProyecto conectar = new IDEProyecto();
+    Connection cn = conectar.conector();
+    
     public RegistroJF() {
         initComponents();
+        
     }
 
     /**
@@ -29,24 +33,23 @@ public class RegistroJF extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        correoTxt = new javax.swing.JTextField();
+        contrasenaTxt = new javax.swing.JTextField();
+        verificarTxt = new javax.swing.JTextField();
+        nicknameTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        botonRegistrar = new javax.swing.JButton();
+        botonA1 = new javax.swing.JButton();
+        BotonA3 = new javax.swing.JButton();
+        botonA2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        botonCondiciones = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,102 +62,102 @@ public class RegistroJF extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(10, 11, 90, 38);
 
-        jTextField2.setBackground(new java.awt.Color(153, 255, 255));
-        jTextField2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        correoTxt.setBackground(new java.awt.Color(153, 255, 255));
+        correoTxt.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        correoTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                correoTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(134, 55, 123, 24);
+        jPanel1.add(correoTxt);
+        correoTxt.setBounds(134, 55, 123, 24);
 
-        jTextField3.setBackground(new java.awt.Color(153, 255, 255));
-        jTextField3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        contrasenaTxt.setBackground(new java.awt.Color(153, 255, 255));
+        contrasenaTxt.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        contrasenaTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                contrasenaTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(134, 90, 123, 24);
+        jPanel1.add(contrasenaTxt);
+        contrasenaTxt.setBounds(134, 90, 123, 24);
 
-        jTextField4.setBackground(new java.awt.Color(153, 255, 255));
-        jTextField4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        verificarTxt.setBackground(new java.awt.Color(153, 255, 255));
+        verificarTxt.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        verificarTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                verificarTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(134, 125, 123, 24);
+        jPanel1.add(verificarTxt);
+        verificarTxt.setBounds(134, 125, 123, 24);
 
-        jTextField5.setBackground(new java.awt.Color(153, 255, 255));
-        jTextField5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        nicknameTxt.setBackground(new java.awt.Color(153, 255, 255));
+        nicknameTxt.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        nicknameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                nicknameTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField5);
-        jTextField5.setBounds(134, 160, 123, 24);
+        jPanel1.add(nicknameTxt);
+        nicknameTxt.setBounds(134, 160, 123, 24);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel2.setText("seleccione un avatar:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(10, 195, 116, 18);
 
-        jButton1.setBackground(new java.awt.Color(204, 102, 255));
-        jButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/accept.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonRegistrar.setBackground(new java.awt.Color(204, 102, 255));
+        botonRegistrar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        botonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/accept.png"))); // NOI18N
+        botonRegistrar.setBorderPainted(false);
+        botonRegistrar.setContentAreaFilled(false);
+        botonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonRegistrarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(190, 330, 60, 60);
+        jPanel1.add(botonRegistrar);
+        botonRegistrar.setBounds(190, 330, 60, 60);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Avatar1.png"))); // NOI18N
-        jButton5.setBorder(null);
-        jButton5.setBorderPainted(false);
-        jButton5.setContentAreaFilled(false);
-        jButton5.setFocusPainted(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        botonA1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Avatar1.png"))); // NOI18N
+        botonA1.setBorder(null);
+        botonA1.setBorderPainted(false);
+        botonA1.setContentAreaFilled(false);
+        botonA1.setFocusPainted(false);
+        botonA1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                botonA1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5);
-        jButton5.setBounds(10, 281, 72, 37);
+        jPanel1.add(botonA1);
+        botonA1.setBounds(10, 281, 72, 37);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Avatar3.png"))); // NOI18N
-        jButton6.setBorder(null);
-        jButton6.setBorderPainted(false);
-        jButton6.setContentAreaFilled(false);
-        jButton6.setFocusPainted(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        BotonA3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Avatar3.png"))); // NOI18N
+        BotonA3.setBorder(null);
+        BotonA3.setBorderPainted(false);
+        BotonA3.setContentAreaFilled(false);
+        BotonA3.setFocusPainted(false);
+        BotonA3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                BotonA3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton6);
-        jButton6.setBounds(171, 281, 72, 37);
+        jPanel1.add(BotonA3);
+        BotonA3.setBounds(171, 281, 72, 37);
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Avatar2.png"))); // NOI18N
-        jButton7.setBorder(null);
-        jButton7.setBorderPainted(false);
-        jButton7.setContentAreaFilled(false);
-        jButton7.setFocusPainted(false);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        botonA2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Avatar2.png"))); // NOI18N
+        botonA2.setBorder(null);
+        botonA2.setBorderPainted(false);
+        botonA2.setContentAreaFilled(false);
+        botonA2.setFocusPainted(false);
+        botonA2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                botonA2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton7);
-        jButton7.setBounds(88, 281, 72, 37);
+        jPanel1.add(botonA2);
+        botonA2.setBounds(88, 281, 72, 37);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/avataaars 2.png"))); // NOI18N
         jPanel1.add(jLabel3);
@@ -167,13 +170,6 @@ public class RegistroJF extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/avataaars 3.png"))); // NOI18N
         jPanel1.add(jLabel5);
         jLabel5.setBounds(187, 219, 52, 56);
-
-        jRadioButton1.setBackground(new java.awt.Color(153, 153, 255));
-        jRadioButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
-        jRadioButton1.setText("registrar como acudiente");
-        jRadioButton1.setOpaque(false);
-        jPanel1.add(jRadioButton1);
-        jRadioButton1.setBounds(110, 20, 160, 25);
 
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel6.setText("correo");
@@ -195,17 +191,17 @@ public class RegistroJF extends javax.swing.JFrame {
         jPanel1.add(jLabel9);
         jLabel9.setBounds(10, 166, 70, 17);
 
-        jRadioButton2.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
-        jRadioButton2.setMnemonic('a');
-        jRadioButton2.setText("acepto los terminos de uso");
-        jRadioButton2.setContentAreaFilled(false);
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCondiciones.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        botonCondiciones.setMnemonic('a');
+        botonCondiciones.setText("acepto los terminos de uso");
+        botonCondiciones.setContentAreaFilled(false);
+        botonCondiciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                botonCondicionesActionPerformed(evt);
             }
         });
-        jPanel1.add(jRadioButton2);
-        jRadioButton2.setBounds(10, 340, 159, 25);
+        jPanel1.add(botonCondiciones);
+        botonCondiciones.setBounds(10, 340, 159, 25);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Background_game 1.png"))); // NOI18N
         jLabel10.setText("jLabel10");
@@ -226,43 +222,63 @@ public class RegistroJF extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void correoTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_correoTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_correoTxtActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void contrasenaTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contrasenaTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_contrasenaTxtActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void verificarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verificarTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_verificarTxtActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void nicknameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicknameTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_nicknameTxtActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void botonA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonA1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        avatarEscogido = 1; 
+    }//GEN-LAST:event_botonA1ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void BotonA3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonA3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        avatarEscogido = 3;         
+        
+    }//GEN-LAST:event_BotonA3ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void botonA2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonA2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+        avatarEscogido = 2; 
+    }//GEN-LAST:event_botonA2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarActionPerformed
+        try{
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO nino (correo, contrasena, nicname, saldo, avatar) VALUES (?,?,?,?,?)");
+            pst.setString(1, correoTxt.getText());
+            pst.setString(2, contrasenaTxt.getText());
+            pst.setString(3, nicknameTxt.getText());
+            pst.setInt(4, 0);
+            pst.setInt(5, avatarEscogido);
+            pst.executeUpdate();
+            
+            
+            
+        }
+        catch(Exception e){
+            System.out.println(e);
+            
+        }
         LeccionesJF fra=new LeccionesJF();
         fra.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonRegistrarActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void botonCondicionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCondicionesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_botonCondicionesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,10 +316,13 @@ public class RegistroJF extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton BotonA3;
+    private javax.swing.JButton botonA1;
+    private javax.swing.JButton botonA2;
+    private javax.swing.JRadioButton botonCondiciones;
+    private javax.swing.JButton botonRegistrar;
+    private javax.swing.JTextField contrasenaTxt;
+    private javax.swing.JTextField correoTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -315,11 +334,7 @@ public class RegistroJF extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField nicknameTxt;
+    private javax.swing.JTextField verificarTxt;
     // End of variables declaration//GEN-END:variables
 }

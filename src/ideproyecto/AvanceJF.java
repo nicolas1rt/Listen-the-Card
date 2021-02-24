@@ -5,17 +5,60 @@
  */
 package ideproyecto;
 
+import ideproyecto.IngresarJF;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Nicolas Ramirez
  */
 public class AvanceJF extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InstruccionesJF
-     */
+    IDEProyecto conectar = new IDEProyecto();
+    Connection cn = conectar.conector();
+    
+    void mostrarAvance(){
+        String []datos = new String[4];
+        int cont=0;
+
+        try{
+                String sql = "Select tiempo, puntaje, fecha from avance Where fk_nino_N='" + IngresarJF.usuarioVerificado+"'";
+
+                System.out.print(IngresarJF.usuarioVerificado);
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+
+                DefaultTableModel modelo = (DefaultTableModel) tablaAvance.getModel();
+                modelo.setRowCount(0);
+                while(rs.next()){
+                    cont = cont+1;
+                    datos[0] = Integer.toString(cont);
+                    datos[1] = rs.getString("tiempo");
+                    datos[2] = rs.getString("puntaje");
+                    datos[3] = rs.getString("fecha");
+                    modelo.addRow(datos);
+                    System.out.print(datos);
+                }
+                //modelo = (DefaultTableModel) tablaAvance.getModel();
+
+                tablaAvance.setModel(modelo);
+            }
+            catch(Exception e){
+                System.out.println(e);
+
+            }
+    }
+    
+    
+    
     public AvanceJF() {
+       
+        
         initComponents();
+        mostrarAvance();
+        
+     
+        
     }
 
     /**
@@ -28,11 +71,9 @@ public class AvanceJF extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaAvance = new javax.swing.JTable();
         jButton10 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -42,44 +83,6 @@ public class AvanceJF extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
         jPanel1.setLayout(null);
-
-        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
-
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel2.setText("Partida 1: Tiempo: 02:40/ Monedas: 23");
-
-        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel3.setText("Partida 2: Tiempo: 03:22/ Monedas: 12");
-
-        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel4.setText("Partida 3: Tiempo: 01:50/ Monedas: 21");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addContainerGap(193, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 59, 251, 270);
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/shop1.png"))); // NOI18N
         jButton11.setBorder(null);
@@ -93,6 +96,25 @@ public class AvanceJF extends javax.swing.JFrame {
         });
         jPanel1.add(jButton11);
         jButton11.setBounds(10, 330, 64, 70);
+
+        tablaAvance.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Partida", "Tiempo", "Puntaje", "Fecha"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaAvance);
+        if (tablaAvance.getColumnModel().getColumnCount() > 0) {
+            tablaAvance.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tablaAvance.getColumnModel().getColumn(1).setMinWidth(50);
+            tablaAvance.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tablaAvance.getColumnModel().getColumn(2).setPreferredWidth(50);
+        }
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 60, 250, 270);
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Lecciones.png"))); // NOI18N
         jButton10.setBorder(null);
@@ -121,9 +143,9 @@ public class AvanceJF extends javax.swing.JFrame {
         jButton9.setBounds(190, 330, 80, 70);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        jLabel1.setText("informe de avance");
+        jLabel1.setText("Informe de avance");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(60, 20, 150, 26);
+        jLabel1.setBounds(60, 20, 160, 26);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Background_game 1.png"))); // NOI18N
         jLabel5.setText("jLabel5");
@@ -201,11 +223,9 @@ public class AvanceJF extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaAvance;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package ideproyecto;
-
+import java.sql.*;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /**
  *
  * @author Nicolas Ramirez
@@ -14,7 +17,12 @@ public class IngresarJF extends javax.swing.JFrame {
     /**
      * Creates new form IngresarJF
      */
+    public static String usuarioVerificado;
+    
+    IDEProyecto conectar = new IDEProyecto();
+    Connection cn = conectar.conector();
     public IngresarJF() {
+        
         initComponents();
     }
 
@@ -34,7 +42,7 @@ public class IngresarJF extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtf_correo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jtf_contraseña = new javax.swing.JTextField();
+        jtf_contrasena = new javax.swing.JTextField();
         jbt_go = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
@@ -91,15 +99,15 @@ public class IngresarJF extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(18, 230, 70, 18);
 
-        jtf_contraseña.setBackground(new java.awt.Color(153, 255, 255));
-        jtf_contraseña.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jtf_contraseña.addActionListener(new java.awt.event.ActionListener() {
+        jtf_contrasena.setBackground(new java.awt.Color(153, 255, 255));
+        jtf_contrasena.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jtf_contrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_contraseñaActionPerformed(evt);
+                jtf_contrasenaActionPerformed(evt);
             }
         });
-        jPanel1.add(jtf_contraseña);
-        jtf_contraseña.setBounds(90, 230, 142, 24);
+        jPanel1.add(jtf_contrasena);
+        jtf_contrasena.setBounds(90, 230, 142, 24);
 
         jbt_go.setBackground(new java.awt.Color(204, 51, 255));
         jbt_go.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -139,14 +147,36 @@ public class IngresarJF extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_correoActionPerformed
 
     private void jbt_goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbt_goActionPerformed
-        LeccionesJF fra=new LeccionesJF();
-        fra.setVisible(true);
-        dispose();
+        
+        String user = jtf_correo.getText();
+        String pass = jtf_contrasena.getText();
+        try {
+            if (user != null && pass != null) {
+                String sql = "Select * from nino Where correo='" + user + "' and contrasena='" + pass + "'";
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                if (rs.next()) {
+                    usuarioVerificado = user;
+                    LeccionesJF fra=new LeccionesJF();
+                    fra.setVisible(true);
+                    dispose();
+                } else {
+                    JPanel panel = new JPanel();
+                    panel.add(new JLabel("Usuario y/o cotnraseña incorrectos." ));
+                    JOptionPane.showMessageDialog(this, panel);
+                }
+        
+        }}
+        catch(Exception e){
+            System.out.println(e);
+           
+        }
+       
     }//GEN-LAST:event_jbt_goActionPerformed
 
-    private void jtf_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_contraseñaActionPerformed
+    private void jtf_contrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_contrasenaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_contraseñaActionPerformed
+    }//GEN-LAST:event_jtf_contrasenaActionPerformed
 
     private void jtf_correoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtf_correoMouseClicked
         // TODO add your handling code here:
@@ -202,7 +232,7 @@ public class IngresarJF extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbt_go;
     private javax.swing.JButton jbt_registrarse;
-    private javax.swing.JTextField jtf_contraseña;
+    private javax.swing.JTextField jtf_contrasena;
     private javax.swing.JTextField jtf_correo;
     // End of variables declaration//GEN-END:variables
 }

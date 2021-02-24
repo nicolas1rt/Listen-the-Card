@@ -14,6 +14,9 @@ public class LeccionesJF extends javax.swing.JFrame {
     /**
      * Creates new form LeccionesJF
      */
+    
+    static int nombreBoton;
+    
     public LeccionesJF() {
         initComponents();
     }
@@ -32,17 +35,17 @@ public class LeccionesJF extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        botonNumeros = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        botonColores = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton7 = new javax.swing.JButton();
+        botonAnimales = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
@@ -73,22 +76,22 @@ public class LeccionesJF extends javax.swing.JFrame {
         jPanel3.setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        jLabel2.setText("números");
+        jLabel2.setText("Números");
         jPanel3.add(jLabel2);
         jLabel2.setBounds(20, 0, 100, 30);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/play1.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonNumeros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/play1.png"))); // NOI18N
+        botonNumeros.setBorder(null);
+        botonNumeros.setBorderPainted(false);
+        botonNumeros.setContentAreaFilled(false);
+        botonNumeros.setFocusPainted(false);
+        botonNumeros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonNumerosActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1);
-        jButton1.setBounds(140, 10, 60, 60);
+        jPanel3.add(botonNumeros);
+        botonNumeros.setBounds(140, 10, 60, 60);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/numeros.jpg"))); // NOI18N
         jPanel3.add(jLabel6);
@@ -106,22 +109,22 @@ public class LeccionesJF extends javax.swing.JFrame {
         jPanel4.setLayout(null);
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        jLabel3.setText("colores");
+        jLabel3.setText("Colores");
         jPanel4.add(jLabel3);
-        jLabel3.setBounds(20, 0, 81, 29);
+        jLabel3.setBounds(20, 0, 90, 29);
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/play1.png"))); // NOI18N
-        jButton8.setBorder(null);
-        jButton8.setBorderPainted(false);
-        jButton8.setContentAreaFilled(false);
-        jButton8.setFocusPainted(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        botonColores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/play1.png"))); // NOI18N
+        botonColores.setBorder(null);
+        botonColores.setBorderPainted(false);
+        botonColores.setContentAreaFilled(false);
+        botonColores.setFocusPainted(false);
+        botonColores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                botonColoresActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton8);
-        jButton8.setBounds(140, 10, 60, 70);
+        jPanel4.add(botonColores);
+        botonColores.setBounds(140, 10, 60, 70);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/colores.jpg"))); // NOI18N
         jPanel4.add(jLabel7);
@@ -139,24 +142,24 @@ public class LeccionesJF extends javax.swing.JFrame {
         jPanel5.setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        jLabel4.setText("vocales");
+        jLabel4.setText("Animales");
         jPanel5.add(jLabel4);
-        jLabel4.setBounds(20, 0, 81, 30);
+        jLabel4.setBounds(20, 0, 100, 30);
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/play1.png"))); // NOI18N
-        jButton7.setBorder(null);
-        jButton7.setBorderPainted(false);
-        jButton7.setContentAreaFilled(false);
-        jButton7.setFocusPainted(false);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        botonAnimales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/play1.png"))); // NOI18N
+        botonAnimales.setBorder(null);
+        botonAnimales.setBorderPainted(false);
+        botonAnimales.setContentAreaFilled(false);
+        botonAnimales.setFocusPainted(false);
+        botonAnimales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                botonAnimalesActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton7);
-        jButton7.setBounds(140, 10, 60, 60);
+        jPanel5.add(botonAnimales);
+        botonAnimales.setBounds(140, 10, 60, 60);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/vocales (2).jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/animales.jpeg"))); // NOI18N
         jPanel5.add(jLabel5);
         jLabel5.setBounds(20, 30, 80, 40);
 
@@ -208,9 +211,9 @@ public class LeccionesJF extends javax.swing.JFrame {
         jButton10.setBounds(100, 350, 72, 37);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        jLabel1.setText("lecciones");
+        jLabel1.setText("Lecciones");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(80, 10, 102, 34);
+        jLabel1.setBounds(80, 10, 110, 34);
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botones/Background_game 1.png"))); // NOI18N
         jLabel9.setText("jLabel9");
@@ -231,23 +234,26 @@ public class LeccionesJF extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonNumerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNumerosActionPerformed
+        nombreBoton=1;
         PartidaJF fra=new PartidaJF();
         fra.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonNumerosActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void botonAnimalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnimalesActionPerformed
+        nombreBoton=2;
         PartidaJF fra=new PartidaJF();
         fra.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_botonAnimalesActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void botonColoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonColoresActionPerformed
+        nombreBoton=3;
         PartidaJF fra=new PartidaJF();
         fra.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_botonColoresActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
@@ -301,11 +307,11 @@ public class LeccionesJF extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonAnimales;
+    private javax.swing.JButton botonColores;
+    private javax.swing.JButton botonNumeros;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

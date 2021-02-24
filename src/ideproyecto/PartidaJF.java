@@ -6,6 +6,9 @@
 package ideproyecto;
 
 import java.awt.Image;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Vector;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Timer;
@@ -16,6 +19,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import ideproyecto.LeccionesJF;
+import java.sql.*;
+import java.util.Date;
+import ideproyecto.IngresarJF;
+
 
 /**
  *
@@ -32,21 +40,88 @@ public class PartidaJF extends javax.swing.JFrame {
     int indiceAnterior = -1;
     JLabel jLabelAnterior = null;
     Tiempo tiempo;
+    
+    IDEProyecto conectar = new IDEProyecto();
+    Connection cn = conectar.conector();
+    
 
+    
     public PartidaJF() {
         initComponents();
-        iconosCartas.add(resizeIcon("s1"));
-        iconosCartas.add(resizeIcon("s2"));
-        iconosCartas.add(resizeIcon("s3"));
-        iconosCartas.add(resizeIcon("s4"));
-        iconosCartas.add(resizeIcon("s5"));
-        iconosCartas.add(resizeIcon("s6"));
+        if(LeccionesJF.nombreBoton==1){
+            Vector < String > numeros = new Vector < String > ();
+            numeros.add("numeros/0");
+            numeros.add("numeros/1");
+            numeros.add("numeros/2");
+            numeros.add("numeros/3");
+            numeros.add("numeros/4");
+            numeros.add("numeros/5");
+            numeros.add("numeros/6");
+            numeros.add("numeros/7");
+            numeros.add("numeros/8");
+            numeros.add("numeros/9");
+            Collections.shuffle(numeros);
+            
+            iconosCartas.add(resizeIcon(numeros.elementAt(0)));
+            iconosCartas.add(resizeIcon(numeros.elementAt(1)));
+            iconosCartas.add(resizeIcon(numeros.elementAt(2)));
+            iconosCartas.add(resizeIcon(numeros.elementAt(3)));
+            iconosCartas.add(resizeIcon(numeros.elementAt(4)));
+            iconosCartas.add(resizeIcon(numeros.elementAt(5)));
+        }
+        else if(LeccionesJF.nombreBoton==2){
+            Vector < String > animales = new Vector < String > ();
+            animales.add("animales/Cat");
+            animales.add("animales/Cow");
+            animales.add("animales/Dog");
+            animales.add("animales/Elephant");
+            animales.add("animales/Fox");
+            animales.add("animales/Monkey");
+            animales.add("animales/Panda");
+            animales.add("animales/Pig");
+            animales.add("animales/Rabbit");
+            animales.add("animales/Sheep");
+            Collections.shuffle(animales);
+            
+            iconosCartas.add(resizeIcon(animales.elementAt(0)));
+            iconosCartas.add(resizeIcon(animales.elementAt(1)));
+            iconosCartas.add(resizeIcon(animales.elementAt(2)));
+            iconosCartas.add(resizeIcon(animales.elementAt(3)));
+            iconosCartas.add(resizeIcon(animales.elementAt(4)));
+            iconosCartas.add(resizeIcon(animales.elementAt(5)));
+        }
+        else if(LeccionesJF.nombreBoton==3){
+            Vector < String > colores = new Vector < String > ();
+            colores.add("colores/Black");
+            colores.add("colores/Blue");
+            colores.add("colores/Gray");
+            colores.add("colores/Green");
+            colores.add("colores/Orange");
+            colores.add("colores/Pink");
+            colores.add("colores/Purple");
+            colores.add("colores/Red");
+            colores.add("colores/White");
+            colores.add("colores/Yellow");
+            Collections.shuffle(colores);
+            
+            iconosCartas.add(resizeIcon(colores.elementAt(0)));
+            iconosCartas.add(resizeIcon(colores.elementAt(1)));
+            iconosCartas.add(resizeIcon(colores.elementAt(2)));
+            iconosCartas.add(resizeIcon(colores.elementAt(3)));
+            iconosCartas.add(resizeIcon(colores.elementAt(4)));
+            iconosCartas.add(resizeIcon(colores.elementAt(5)));
+        }
+        
+      
 
         for (int i = 0; i < 12; i++) {
             indices.add(-1);
         }
-
+        
+       
+      
         for (int i = 0; i < 6; i++) {
+            
             llenarIndices(i);
             llenarIndices(i);
         }
@@ -382,6 +457,9 @@ public class PartidaJF extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
+    
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PartidaJF().setVisible(true);
@@ -390,14 +468,19 @@ public class PartidaJF extends javax.swing.JFrame {
     }
 
     private ImageIcon resizeIcon(String src) {
-        ImageIcon icon = new ImageIcon("src/cartas/" + src + ".jpg");
+        ImageIcon icon = new ImageIcon("src/cartas/" + src + ".png");
         Image image = icon.getImage(); // transform it 
         Image newimg = image.getScaledInstance(63, 64, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
         icon = new ImageIcon(newimg);
         return icon;
     }
+   
 
     private void destaparCarta(JLabel jLabel, int posCarta) {
+        
+        
+        
+        System.out.println(indices.get(posCarta));
         if (!indicesDestapados.contains(indices.get(posCarta))) {
             jLabel.setIcon(iconosCartas.get(indices.get(posCarta)));
             if (indiceAnterior >= 0) {
@@ -438,6 +521,24 @@ public class PartidaJF extends javax.swing.JFrame {
             panel.add(new JLabel("Tiempo transcurrido: " + jLabel1.getText()));
             panel.add(new JLabel("Puntaje total: " + puntaje));
             JOptionPane.showMessageDialog(this, panel);
+            
+            Date objDate = new Date();
+            String puntos = Integer.toString(puntaje);
+            try{
+            PreparedStatement pst = cn.prepareStatement("INSERT INTO avance (tiempo, puntaje, fecha, fk_nino_N) VALUES (?,?,?,?)");
+
+            pst.setString(1, jLabel1.getText());
+            pst.setString(2, puntos);
+            pst.setString(3, objDate.toString());
+            pst.setString(4,IngresarJF.usuarioVerificado);
+            pst.executeUpdate();
+
+            
+            }
+            catch(Exception e){
+                System.out.println(e);
+
+            }
             cerrar();
         }
     }
